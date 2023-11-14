@@ -51,4 +51,9 @@ public class Order {
         throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name);
     }
 
+    public Map<Menu, Integer> getOrderItems() {
+        return new HashMap<>(orderItems);
+    }
+
+
 }
