@@ -12,4 +12,15 @@ public enum Calendar {
             2, 3, 9, 10, 16, 17, 23, 24, 30, 31
     );
 
+    public static boolean isSpecialEventDay(int day) {
+        return specialEventDays.contains(day);
+    }
+
+    public static boolean isWeekend(int day) {
+        return weekendDays.contains(day);
+    }
+
+    public static boolean isWeekDay(int day) {
+        return !weekendDays.contains(day);
+    }
 }
