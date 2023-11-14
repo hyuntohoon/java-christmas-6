@@ -41,4 +41,14 @@ public class Order {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 수량: " + quantityString);
         }
     }
+
+    private Menu findMenuByName(String name) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getName().equals(name)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name);
+    }
+
 }
