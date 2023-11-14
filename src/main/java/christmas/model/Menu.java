@@ -30,4 +30,16 @@ public enum Menu {
         this.type = type;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
