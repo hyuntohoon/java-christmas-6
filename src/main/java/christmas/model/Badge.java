@@ -13,4 +13,21 @@ public enum Badge {
         this.displayName = displayName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public static Badge getBadgeForAmount(int amount) {
+        if (amount >= SANTA.minimumAmount) {
+            return SANTA;
+        }
+        if (amount >= TREE.minimumAmount) {
+            return TREE;
+        }
+        if (amount >= STAR.minimumAmount) {
+            return STAR;
+        }
+        return null; // 또는 기본 뱃지를 반환할 수도 있습니다.
+    }
+
 }
