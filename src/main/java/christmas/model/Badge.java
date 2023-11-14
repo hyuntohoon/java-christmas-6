@@ -27,7 +27,7 @@ public enum Badge {
         if (amount >= STAR.minimumAmount) {
             return STAR;
         }
-        return null; // 또는 기본 뱃지를 반환할 수도 있습니다.
+        return null;
     }
 
 }
