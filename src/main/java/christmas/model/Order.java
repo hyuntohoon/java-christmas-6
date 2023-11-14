@@ -21,5 +21,17 @@ public class Order {
         }
     }
 
+    private void addItemFromString(String item) {
+        String[] parts = item.split("-");
+
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("[ERROR] 주문 형식이 올바르지 않습니다: " + item);
+        }
+
+        String menuName = parts[0].trim();
+        int quantity = parseQuantity(parts[1].trim());
+        Menu menu = findMenuByName(menuName);
+        orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
+    }
 
 }
