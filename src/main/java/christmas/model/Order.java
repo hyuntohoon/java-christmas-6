@@ -12,4 +12,14 @@ public class Order {
         this.orderItems = new HashMap<>();
         parseAndAddItems(orderMenuString);
     }
+
+    private void parseAndAddItems(String orderMenuString) {
+        String[] menuItems = orderMenuString.split(",");
+
+        for (String item : menuItems) {
+            addItemFromString(item);
+        }
+    }
+
+
 }
