@@ -34,4 +34,11 @@ public class Order {
         orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
     }
 
+    private int parseQuantity(String quantityString) {
+        try {
+            return Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 수량: " + quantityString);
+        }
+    }
 }
