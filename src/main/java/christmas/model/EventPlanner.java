@@ -11,15 +11,19 @@ public class EventPlanner {
     private Badge eventBadge;
     private GiftEvent giftEvent;
 
+    private DiscountManager discountManager;
+
     public EventPlanner(int orderDay, String orderMenuString) {
         this.orderDay = orderDay;
         this.order = new Order(orderMenuString);
+        this.discountManager = new DiscountManager();
         calculateOrderDetails();
     }
 
     private void calculateOrderDetails() {
         this.totalBeforeDiscount = order.calculateTotalPrice();
-        this.totalDiscount = calculateTotalDiscount();
+        this.discountManager.calculateDiscounts(order, orderDay);
+        this.totalDiscount = this.discountManager.getTotalDiscount();
         this.totalAfterDiscount = this.totalBeforeDiscount - this.totalDiscount;
         this.eventBadge = Badge.getBadgeForAmount(totalDiscount);
         this.giftEvent = GiftEvent.determineGift(totalBeforeDiscount);
