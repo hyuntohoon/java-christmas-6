@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.Map;
+
 public class EventPlanner {
     private Order order;
     private int orderDay;
@@ -23,4 +25,14 @@ public class EventPlanner {
         this.giftItem = determineGiftItem();
     }
 
+    private int calculateTotalDiscount() {
+        boolean isWeekend = Calendar.isWeekend(this.orderDay);
+        boolean isSpecialEvent = Calendar.isSpecialEventDay(this.orderDay);
+        int discount = 0;
+        Map<Menu, Integer> orderItems = this.order.getOrderItems();
+        discount += Discount.calculateWeekendMainDiscount(orderItems, isWeekend);
+        discount += Discount.calculateSpecialEventDiscount(isSpecialEvent);
+        discount += Discount.calculateChristmasDdayDiscount(this.orderDay);
+        return discount;
+    }
 }
