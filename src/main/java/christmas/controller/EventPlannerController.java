@@ -15,9 +15,14 @@ public class EventPlannerController {
 
         OutputView.displayOrderDetails(eventPlanner.getOrderDetails());
         OutputView.displayTotalBeforeDiscount(eventPlanner.calculateTotalBeforeDiscount());
+        OutputView.displayGiftItemDetails(eventPlanner.getGiftItemDetails());
+
+        String discountDetails = eventPlanner.getDiscountDetails();
+        OutputView.displayDiscountDetails(discountDetails);
         OutputView.displayTotalDiscount(eventPlanner.calculateTotalDiscount());
+
         OutputView.displayTotalAfterDiscount(eventPlanner.calculateTotalAfterDiscount());
         OutputView.displayBadgeDetails(eventPlanner.getEventBadgeDetails());
-        OutputView.displayGiftItemDetails(eventPlanner.getGiftItemDetails());
+
     }
 }
