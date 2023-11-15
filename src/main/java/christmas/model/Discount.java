@@ -20,7 +20,7 @@ public class Discount {
         }
         return orderItems.entrySet().stream()
                 .filter(entry -> "Dessert".equals(entry.getKey().getType()))
-                .mapToInt(entry -> WEEKEND_MAIN_DISCOUNT * entry.getValue())
+                .mapToInt(entry -> WEEKDAY_DESSERT_DISCOUNT * entry.getValue())
                 .sum();
     }
 
