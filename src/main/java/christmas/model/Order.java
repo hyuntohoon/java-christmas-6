@@ -38,4 +38,10 @@ public class Order {
     public Map<Menu, Integer> getOrderItems() {
         return new HashMap<>(orderItems);
     }
+
+    public int calculateTotalPrice(Order order) {
+        return order.getOrderItems().entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
 }
