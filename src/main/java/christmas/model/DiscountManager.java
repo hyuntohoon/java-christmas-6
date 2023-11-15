@@ -21,4 +21,11 @@ public class DiscountManager {
         addDiscount("주말 메인 할인", Discount.calculateWeekendMainDiscount(orderItems, isWeekend));
         addDiscount("특별 이벤트 할인", Discount.calculateSpecialEventDiscount(isSpecialEvent));
     }
+
+    private void addDiscount(String name, int amount) {
+        if (amount > 0) {
+            discounts.put(name, amount);
+        }
+    }
+
 }
