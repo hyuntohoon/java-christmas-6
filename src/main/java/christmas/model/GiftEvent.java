@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum GiftEvent {
-    CHAMPAGNE_GIFT(120000, "샴페인", 1, 25000); // 예: 12만원 이상 구매 시 샴페인 1개 증정
+    CHAMPAGNE_GIFT(120000, "샴페인", 1, 25000);
 
     private final int threshold;
     private final String giftName;
@@ -37,7 +37,15 @@ public enum GiftEvent {
         return quantity;
     }
 
-    public int getGiftPrice() {
-        return giftPrice;
+    public int getGiftPrice() { return giftPrice;}
+
+    public static GiftEvent fromDisplayName(String displayName) {
+        for (GiftEvent event : values()) {
+            if (event.giftName.equals(displayName)) {
+                return event;
+            }
+        }
+        throw new IllegalArgumentException("No gift event with name: " + displayName);
     }
+
 }
