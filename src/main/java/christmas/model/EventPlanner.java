@@ -9,7 +9,7 @@ public class EventPlanner {
     private int totalDiscount;
     private int totalAfterDiscount;
     private Badge eventBadge;
-    private String giftItem;
+    private GiftEvent giftEvent;
 
     public EventPlanner(int orderDay, String orderMenuString) {
         this.orderDay = orderDay;
@@ -21,8 +21,8 @@ public class EventPlanner {
         this.totalBeforeDiscount = order.calculateTotalPrice();
         this.totalDiscount = calculateTotalDiscount();
         this.totalAfterDiscount = this.totalBeforeDiscount - this.totalDiscount;
-        this.eventBadge = determineEventBadge();
-        this.giftItem = determineGiftItem();
+        this.eventBadge = Badge.getBadgeForAmount(totalDiscount);
+        this.giftEvent = GiftEvent.determineGift(totalBeforeDiscount);
     }
 
     private int calculateTotalDiscount() {
@@ -34,11 +34,6 @@ public class EventPlanner {
         discount += Discount.calculateSpecialEventDiscount(isSpecialEvent);
         discount += Discount.calculateChristmasDdayDiscount(this.orderDay);
         return discount;
-    }
-
-    private Badge determineEventBadge() {
-        int totalDiscountAmount = this.totalDiscount;
-        return Badge.getBadgeForAmount(totalDiscountAmount);
     }
 
 }
