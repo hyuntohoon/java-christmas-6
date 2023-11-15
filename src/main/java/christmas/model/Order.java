@@ -28,16 +28,16 @@ public class Order {
         }
 
         String menuName = parts[0].trim();
-        Menu menu = findMenuByName(menuName);
-
+        int quantity;
         try {
-            int quantity = Integer.parseInt(parts[1].trim());
-            orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
+            quantity = Integer.parseInt(parts[1].trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
-    }
 
+        Menu menu = findMenuByName(menuName);
+        orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
+    }
 
     private Menu findMenuByName(String name) {
         return Arrays.stream(Menu.values())
