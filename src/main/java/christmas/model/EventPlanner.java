@@ -30,7 +30,11 @@ public class EventPlanner {
     }
 
     public int calculateTotalAfterDiscount() {
-        return calculateTotalBeforeDiscount() - calculateTotalDiscount();
+        int totalBeforeDiscount = calculateTotalBeforeDiscount();
+        int totalDiscountWithoutGift = discountManager.getTotalDiscountWithoutGift();
+        System.out.println(totalBeforeDiscount);
+        System.out.println(totalDiscountWithoutGift);
+        return totalBeforeDiscount - totalDiscountWithoutGift;
     }
 
     public String getDiscountDetails() {
