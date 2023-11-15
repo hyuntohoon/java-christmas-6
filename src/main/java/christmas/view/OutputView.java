@@ -16,10 +16,20 @@ public class OutputView {
         System.out.println(totalBeforeDiscount + "원");
     }
 
+    public static void displayGiftItemDetails(String giftItemDetails) {
+        System.out.println("\n<증정 메뉴>");
+        System.out.println(giftItemDetails.equals("") ? "없음" : giftItemDetails);
+    }
+
+    public static void displayDiscountDetails(String discountDetails) {
+        System.out.println("\n<혜택 내역>");
+        System.out.println(discountDetails);
+    }
+
     public static void displayTotalDiscount(int totalDiscount) {
-        System.out.println("\n<할인 내역>");
+        System.out.println("\n<총혜택 금액>");
         if (totalDiscount > 0) {
-            System.out.println(totalDiscount + "원");
+            System.out.println("-" + totalDiscount + "원");
             return;
         }
         System.out.println("없음");
@@ -35,9 +45,5 @@ public class OutputView {
         System.out.println(badgeDetails);
     }
 
-    public static void displayGiftItemDetails(String giftItemDetails) {
-        System.out.println("\n<증정 메뉴>");
-        System.out.println(giftItemDetails.equals("") ? "없음" : giftItemDetails);
-    }
 
 }
