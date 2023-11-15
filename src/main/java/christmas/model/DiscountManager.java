@@ -20,7 +20,30 @@ public class DiscountManager {
         addDiscount("평일 디저트 할인", Discount.calculateWeekdayDessertDiscount(orderItems, isWeekday));
         addDiscount("주말 메인 할인", Discount.calculateWeekendMainDiscount(orderItems, isWeekend));
         addDiscount("특별 이벤트 할인", Discount.calculateSpecialEventDiscount(isSpecialEvent));
+
+        int giftDiscount = calculateGiftEventDiscount(order);
+
+        if (giftDiscount > 0) {
+            discounts.put("증정 이벤트", giftDiscount);
+        }
     }
+
+    private int calculateGiftEventDiscount(Order order) {
+        int totalBeforeDiscount = order.calculateTotalPrice(order);
+        Map<String, Integer> giftItems = GiftEvent.determineGifts(totalBeforeDiscount);
+
+        return giftItems.entrySet().stream()
+                .mapToInt(entry -> {
+                    String giftName = entry.getKey();
+                    int quantity = entry.getValue();
+                    GiftEvent giftEvent = GiftEvent.fromDisplayName(giftName);
+                    return giftEvent.getGiftPrice() * quantity;
+                })
+                .sum();
+    }
+
+
+
 
     private void addDiscount(String name, int amount) {
         if (amount > 0) {
