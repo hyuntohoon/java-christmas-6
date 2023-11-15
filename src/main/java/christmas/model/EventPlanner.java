@@ -15,5 +15,12 @@ public class EventPlanner {
         calculateOrderDetails();
     }
 
+    private void calculateOrderDetails() {
+        this.totalBeforeDiscount = order.calculateTotalPrice();
+        this.totalDiscount = calculateTotalDiscount();
+        this.totalAfterDiscount = this.totalBeforeDiscount - this.totalDiscount;
+        this.eventBadge = determineEventBadge();
+        this.giftItem = determineGiftItem();
+    }
 
 }
