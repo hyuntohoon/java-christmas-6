@@ -18,4 +18,9 @@ public class InputView {
             throw new IllegalArgumentException("[ERROR] 숫자를 입력해야 합니다.");
         }
     }
+
+    public static String readOrderMenu() {
+        System.out.println(ASK_ORDER_MENU);
+        return Console.readLine();
+    }
 }
