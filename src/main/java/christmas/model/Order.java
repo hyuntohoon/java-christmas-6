@@ -22,17 +22,28 @@ public class Order {
 
     private void addItemFromString(String item) {
         String[] parts = item.split("-");
+
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+
         String menuName = parts[0].trim();
-        int quantity = Integer.parseInt(parts[1].trim());
         Menu menu = findMenuByName(menuName);
-        orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
+
+        try {
+            int quantity = Integer.parseInt(parts[1].trim());
+            orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
+
 
     private Menu findMenuByName(String name) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.getName().equalsIgnoreCase(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."));
     }
 
     public Map<Menu, Integer> getOrderItems() {
