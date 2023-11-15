@@ -28,4 +28,12 @@ public class DiscountManager {
         }
     }
 
+    public Map<String, Integer> getDiscounts() {
+        return discounts;
+    }
+
+    public int getTotalDiscount() {
+        return discounts.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
 }
