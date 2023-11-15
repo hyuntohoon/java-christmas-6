@@ -34,4 +34,11 @@ public class Discount {
                 .sum();
     }
 
+    public static int calculateSpecialEventDiscount(boolean isSpecialEvent) {
+        if (isSpecialEvent) {
+            return SPECIAL_EVENT_DISCOUNT;
+        }
+        return 0;
+    }
+
 }
