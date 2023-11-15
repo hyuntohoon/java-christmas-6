@@ -10,4 +10,13 @@ public enum GiftEvent {
         this.threshold = threshold;
         this.giftItem = giftItem;
     }
+
+    public static String determineGift(int totalAmount) {
+        for (GiftEvent event : GiftEvent.values()) {
+            if (totalAmount >= event.threshold) {
+                return event.giftItem;
+            }
+        }
+        return "";
+    }
 }
