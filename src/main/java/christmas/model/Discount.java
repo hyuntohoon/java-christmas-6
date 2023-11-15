@@ -24,4 +24,14 @@ public class Discount {
                 .sum();
     }
 
+    public static int calculateWeekendMainDiscount(Map<Menu, Integer> orderItems, boolean isWeekend) {
+        if (!isWeekend) {
+            return 0;
+        }
+        return orderItems.entrySet().stream()
+                .filter(entry -> "Main".equals(entry.getKey().getType()))
+                .mapToInt(entry -> WEEKEND_MAIN_DISCOUNT * entry.getValue())
+                .sum();
+    }
+
 }
