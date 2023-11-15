@@ -35,4 +35,10 @@ public class EventPlanner {
         discount += Discount.calculateChristmasDdayDiscount(this.orderDay);
         return discount;
     }
+
+    private Badge determineEventBadge() {
+        int totalDiscountAmount = this.totalDiscount;
+        return Badge.getBadgeForAmount(totalDiscountAmount);
+    }
+
 }
