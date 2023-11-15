@@ -36,4 +36,10 @@ public class DiscountManager {
         return discounts.values().stream().mapToInt(Integer::intValue).sum();
     }
 
+    public int calculateTotalPrice(Order order) {
+        return order.getOrderItems().entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
+
 }

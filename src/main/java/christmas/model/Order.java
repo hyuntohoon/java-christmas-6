@@ -53,11 +53,4 @@ public class Order {
         return new HashMap<>(orderItems);
     }
 
-    public int calculateTotalPrice() {
-        return orderItems.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
-                .sum();
-    }
-
-
 }
