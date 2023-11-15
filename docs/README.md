@@ -64,4 +64,8 @@
 ### Controller 
     1. EventPlannerController : 이벤트 플래너 관련 요청을 처리합니다. 사용자로부터 입력을 받고, 해당 입력에 따라 Model을 통해 데이터를 처리한 후, 결과를 OutputView를 통해 출력합니다
 
+### Validator
+    1. InputValidator : 입력 받은 데이터의 유효성을 검사하는 로직을 가진 클래스입니다.
+    2. MenuValidator : Menu에 대한 데이터 유효성 검사하는 로직을 가진 클래스입니다.
+
 
