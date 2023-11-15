@@ -7,12 +7,12 @@ import christmas.view.OutputView;
 public class EventPlannerController {
 
     public void run() {
+        OutputView.displayWelcomeMessage();
         int orderDay = InputView.readOrderDate();
         String orderMenuString = InputView.readOrderMenu();
 
         EventPlanner eventPlanner = new EventPlanner(orderDay, orderMenuString);
 
-        OutputView.displayWelcomeMessage();
         OutputView.displayOrderDetails(eventPlanner.getOrderDetails());
         OutputView.displayTotalBeforeDiscount(eventPlanner.calculateTotalBeforeDiscount());
         OutputView.displayTotalDiscount(eventPlanner.calculateTotalDiscount());
