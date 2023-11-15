@@ -1,5 +1,6 @@
 package christmas.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,36 +22,20 @@ public class Order {
 
     private void addItemFromString(String item) {
         String[] parts = item.split("-");
-
-        if (parts.length != 2) {
-            throw new IllegalArgumentException("[ERROR] 주문 형식이 올바르지 않습니다: " + item);
-        }
-
         String menuName = parts[0].trim();
-        int quantity = parseQuantity(parts[1].trim());
+        int quantity = Integer.parseInt(parts[1].trim());
         Menu menu = findMenuByName(menuName);
         orderItems.put(menu, orderItems.getOrDefault(menu, 0) + quantity);
     }
 
-    private int parseQuantity(String quantityString) {
-        try {
-            return Integer.parseInt(quantityString);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 수량: " + quantityString);
-        }
-    }
-
     private Menu findMenuByName(String name) {
-        for (Menu menu : Menu.values()) {
-            if (menu.getName().equals(name)) {
-                return menu;
-            }
-        }
-        throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name);
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name));
     }
 
     public Map<Menu, Integer> getOrderItems() {
         return new HashMap<>(orderItems);
     }
-
 }
