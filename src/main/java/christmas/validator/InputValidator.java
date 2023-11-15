@@ -1,5 +1,7 @@
 package christmas.validator;
 
+import christmas.model.Menu;
+
 public class InputValidator {
 
     public static void validateOrderDate(int orderDate) {
@@ -10,8 +12,21 @@ public class InputValidator {
 
     public static void validateOrderMenu(String input) {
         String[] menuItems = input.split(",");
+        boolean allBeverages = true;
+
         for (String item : menuItems) {
             validateMenuItem(item);
+            String menuName = item.split("-")[0].trim();
+            String menuType = Menu.getTypeByName(menuName);
+
+            if (!menuType.equals("Beverage")) {
+                allBeverages = false;
+                break;
+            }
+        }
+
+        if (allBeverages) {
+            throw new IllegalArgumentException("[ERROR] 음료만 주문 시, 주문할 수 없습니다.");
         }
     }
 
@@ -36,4 +51,6 @@ public class InputValidator {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
+
+
 }

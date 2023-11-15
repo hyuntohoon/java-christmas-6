@@ -42,4 +42,13 @@ public enum Menu {
     public int getPrice() {
         return price;
     }
+
+    public static String getTypeByName(String name) {
+        for (Menu menu : Menu.values()) {
+            if (menu.name.equalsIgnoreCase(name)) {
+                return menu.type;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴: " + name);
+    }
 }
