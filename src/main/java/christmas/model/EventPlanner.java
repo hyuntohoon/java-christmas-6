@@ -44,7 +44,11 @@ public class EventPlanner {
     }
 
     public String getEventBadgeDetails() {
-        return Badge.getBadgeForAmount(calculateTotalDiscount()).getDisplayName();
+        Badge badge = Badge.getBadgeForAmount(calculateTotalDiscount());
+        if (badge != null) {
+            return badge.getDisplayName();
+        }
+        return "없음";
     }
 
     public String getGiftItemDetails() {
