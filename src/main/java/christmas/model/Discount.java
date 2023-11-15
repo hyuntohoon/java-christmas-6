@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.Map;
+
 public class Discount {
     private static final int WEEKDAY_DESSERT_DISCOUNT = 2023;
     private static final int WEEKEND_MAIN_DISCOUNT = 2023;
@@ -10,6 +12,16 @@ public class Discount {
             return 1000 + (orderDay - 1) * 100;
         }
         return 0;
+    }
+
+    public static int calculateWeekdayDessertDiscount(Map<Menu, Integer> orderItems, boolean isWeekday) {
+        if (!isWeekday) {
+            return 0;
+        }
+        return orderItems.entrySet().stream()
+                .filter(entry -> "Dessert".equals(entry.getKey().getType()))
+                .mapToInt(entry -> WEEKEND_MAIN_DISCOUNT * entry.getValue())
+                .sum();
     }
 
 }
