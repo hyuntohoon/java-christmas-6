@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 public class EventPlanner {
     private final Order order;
     private final int orderDay;
-    private final Badge eventBadge;
-    private final Map<String, Integer> giftItems;
     private final DiscountManager discountManager;
 
     public EventPlanner(int orderDay, String orderMenuString) {
@@ -15,33 +13,45 @@ public class EventPlanner {
         this.order = new Order(orderMenuString);
         this.discountManager = new DiscountManager();
         this.discountManager.calculateDiscounts(order, orderDay);
-        this.eventBadge = Badge.getBadgeForAmount(discountManager.getTotalDiscount());
-        this.giftItems = GiftEvent.determineGifts(discountManager.calculateTotalPrice(order));
     }
 
-    public int getTotalBeforeDiscount() {
-        return discountManager.calculateTotalPrice(order);
+    public String getOrderDetails() {
+        return order.getOrderItems().entrySet().stream()
+                .map(entry -> entry.getKey().getName() + " " + entry.getValue() + "개")
+                .collect(Collectors.joining("\n"));
     }
 
-    public int getTotalDiscount() {
+    public int calculateTotalBeforeDiscount() {
+        return order.calculateTotalPrice(order);
+    }
+
+    public int calculateTotalDiscount() {
         return discountManager.getTotalDiscount();
     }
 
-    public int getTotalAfterDiscount() {
-        return getTotalBeforeDiscount() - getTotalDiscount();
+    public int calculateTotalAfterDiscount() {
+        return calculateTotalBeforeDiscount() - calculateTotalDiscount();
     }
 
-    public String getGiftItemNames() {
+    public String getDiscountDetails() {
+        Map<String, Integer> discounts = discountManager.getDiscounts();
+        if (discounts.isEmpty()) {
+            return "없음";
+        }
+        return discounts.entrySet().stream()
+                .map(entry -> entry.getKey() + ": -" + entry.getValue() + "원")
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String getEventBadgeDetails() {
+        return Badge.getBadgeForAmount(calculateTotalDiscount()).getDisplayName();
+    }
+
+    public String getGiftItemDetails() {
+        Map<String, Integer> giftItems = GiftEvent.determineGifts(calculateTotalBeforeDiscount());
         if (giftItems.isEmpty()) {
-            return null;
+            return "없음";
         }
         return giftItems.keySet().stream().collect(Collectors.joining(", "));
     }
-
-    public int getTotalGiftValue() {
-        return giftItems.entrySet().stream()
-                .mapToInt(entry -> GiftEvent.valueOf(entry.getKey().toUpperCase()).getGiftPrice() * entry.getValue())
-                .sum();
-    }
-
 }
